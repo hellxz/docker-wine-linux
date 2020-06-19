@@ -4,8 +4,8 @@ set -e
 echo -e "[\033[32m\033[5m+\033[0m]Cloning speed may be slow, please waitting..."
 DIR="deepin-wine-ubuntu"
 [ -d $DIR ] && rm -rf $DIR 
-#git clone https://github.com/hellxz/${DIR}.git
-git clone git@gitee.com:Hellxz/deepin-wine-ubuntu.git
+#更换成国内gitee原作者仓库
+git clone https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu.git
 ##########build docker image
 if sudo docker build -t docker-wine-linux ./; then
 	sed -i '4,15s/^/^/g' $0
