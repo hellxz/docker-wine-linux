@@ -1,13 +1,13 @@
 #!/bin/bash
 xhost + &>/dev/null
 set -e
-echo -e "[\033[32m\033[5m+\033[0m]Cloning speed may be slow, please waitting..."
 DIR="deepin-wine-ubuntu"
+XINPUT_METHOD=`echo $XMODIFIERS |cut -d "=" -f 2`
+echo -e "[\033[32m\033[5m+\033[0m]Cloning speed may be slow, please waitting..."
 [ -d $DIR ] && rm -rf $DIR 
 #更换成国内gitee原作者仓库
 git clone --depth 1 https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu.git $DIR
 ##########build docker image
-XINPUT_METHOD=`echo $XMODIFIERS |cut -d "=" -f 2`
 if sudo docker build --no-cache \ 
 	--build-arg IM=$XINPUT_METHOD \
 	-t docker-wine-linux ./; then
