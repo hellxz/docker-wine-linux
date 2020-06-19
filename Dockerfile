@@ -20,7 +20,7 @@ ENV LC_ALL=zh_CN.UTF-8 \
 
 RUN rm -rf /var/lib/apt/lists/* \
     && apt-get update \
-    && apt-get install wget git locales ttf-wqy-zenhei -y \
+    && apt-get install wget git locales ttf-wqy-zenhei sudo -y \
     && apt-get clean && apt-get autoclean \
     && locale-gen en_US.UTF-8 zh_CN.UTF-8 zh_CN.GBK \
     && update-locale LC_ALL=zh_CN.UTF-8 \
