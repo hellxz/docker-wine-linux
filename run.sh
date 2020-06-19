@@ -7,7 +7,10 @@ DIR="deepin-wine-ubuntu"
 #更换成国内gitee原作者仓库
 git clone --depth 1 https://gitee.com/wszqkzqk/deepin-wine-for-ubuntu.git $DIR
 ##########build docker image
-if sudo docker build --no-cache -t docker-wine-linux ./; then
+XINPUT_METHOD=`echo $XMODIFIERS |cut -d "=" -f 2`
+if sudo docker build --no-cache \ 
+	--build-arg IM=$XINPUT_METHOD \
+	-t docker-wine-linux ./; then
 	sed -i '4,15s/^/#&/g' $0
 else
 	printf "build docker image error,exit process\n"
