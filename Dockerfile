@@ -5,30 +5,29 @@
 FROM ubuntu:bionic
 MAINTAINER RokasUrbelis(Based on github deepin-wine-ubuntu project)
 
+ARG IM=ibus
+
 ADD deepin-wine-ubuntu /root/deepin-wine-ubuntu
 COPY link.sh /root/
 COPY deb/ /root/deepin-wine-ubuntu/
 COPY sources.list /etc/apt/
-RUN rm -rf /var/lib/apt/lists/*
-RUN apt-get update
 
-RUN apt-get install wget git locales ttf-wqy-zenhei sudo -y
-RUN apt-get clean && apt-get autoclean
-ENV LC_CTYPE=zh_CN.UTF-8 \
-    LC_ALL=zh_CN.UTF-8 \
-    XMODIFIERS="@im=ibus"
+ENV LC_ALL=zh_CN.UTF-8 \
+    XIM=$IM \
+    GTK_IM_MODULE=$IM \
+    QT_IM_MODULE=$IM \
+    XMODIFIERS="@im=$IM"
 
-RUN \
-  locale-gen en_US.UTF-8 zh_CN.UTF-8 \
-  zh_CN.GBK && \
-  update-locale LANG=zh_CN.UTF-8
-
-# Define default command.
-
-RUN yes|bash /root/deepin-wine-ubuntu/install.sh
-#RUN cd && ln -s /opt/deepin-wine-ubuntu/app/* .
-RUN /bin/bash /root/link.sh && rm -f /root/link.sh
-RUN rm -rf /root/deepin-wine-ubuntu
+RUN rm -rf /var/lib/apt/lists/* \
+    && apt-get update \
+    && apt-get install wget git locales ttf-wqy-zenhei -y \
+    && apt-get clean && apt-get autoclean \
+    && locale-gen en_US.UTF-8 zh_CN.UTF-8 zh_CN.GBK \
+    && update-locale LC_ALL=zh_CN.UTF-8 \
+    && yes|bash /root/deepin-wine-ubuntu/install.sh \
+    && /bin/bash /root/link.sh \
+    && rm -f /root/link.sh \
+    && rm -rf /root/deepin-wine-ubuntu
 WORKDIR /root
 
 CMD ["/bin/bash"]

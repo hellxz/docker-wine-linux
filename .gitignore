@@ -1,0 +1,4 @@
+#忽略deepin-wine-ubuntu
+deepin-wine-ubuntu/
+#忽略APP_PATH
+APP_PATH
