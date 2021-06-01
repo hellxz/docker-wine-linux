@@ -8,16 +8,14 @@ function USAGE() {
 		echo '		-i  [Docker Container ID or Name] [APP Name]'
 		echo '		<APP Name> list:'
 		echo ' 			      QQ'
-		echo ' 			      TIM'
 		echo ' 			      WeChat'
 		echo ' 			      BaiduNetDisk'
 		echo '			      ThunderSpeed'
 		echo '			      Foxmail'
-		echo 'Example: source start.sh -i 0af TIM'
+		echo 'Example: source start.sh -i 0af QQ'
 }
 APP_LIST=(
 QQ
-TIM
 WeChat
 BaiduNetDisk
 ThunderSpeed
