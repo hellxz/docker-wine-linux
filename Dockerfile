@@ -17,7 +17,8 @@ ENV LC_ALL=zh_CN.UTF-8 \
     GTK_IM_MODULE=$IM \
     QT_IM_MODULE=$IM \
     XMODIFIERS="@im=$IM" \
-    TZ=Asia/Shanghai
+    TZ=Asia/Shanghai \
+    DEBIAN_FRONTEND=non-interactive
 
 RUN apt-get update \
     && apt-get install wget git locales ttf-wqy-zenhei sudo tzdata -y \
