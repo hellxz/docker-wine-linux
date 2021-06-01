@@ -30,7 +30,7 @@ CREATE
 code=$?
 if [ "$code" == "0" ]; then
 	awk 'BEGIN{printf "Your container id is ";system("cat docker.id && echo");system("echo -n [\033[32m\033[5m+\033[0m]");\
-	printf "Run [source start.sh -i '" $dockerid "'";printf "TIM] to run TIM or another APP\n"}'
+	printf "Run [source start.sh -i '" $dockerid "'";printf "QQ] to run QQ or another APP\n"}'
 	echo
 	echo "Exec 'bash start.sh --help' for more information."
 	shred -f -u -v -z docker.id >/dev/null 2>&1
