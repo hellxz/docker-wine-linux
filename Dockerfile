@@ -19,10 +19,8 @@ ENV LC_ALL=zh_CN.UTF-8 \
     XMODIFIERS="@im=$IM" \
     TZ=Asia/Shanghai
 
-RUN rm -rf /var/lib/apt/lists/* \
-    && apt-get update \
+RUN apt-get update \
     && apt-get install wget git locales ttf-wqy-zenhei sudo tzdata -y \
-    && apt-get clean && apt-get autoclean \
     && locale-gen en_US.UTF-8 zh_CN.UTF-8 zh_CN.GBK \
     && update-locale LC_ALL=zh_CN.UTF-8 \
     && yes|bash /root/deepin-wine-ubuntu/install.sh \
@@ -30,7 +28,9 @@ RUN rm -rf /var/lib/apt/lists/* \
     && rm -f /root/link.sh \
     && rm -rf /root/deepin-wine-ubuntu \
     && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
-    && echo ${TZ} > /etc/timezone
+    && echo ${TZ} > /etc/timezone \
+    && apt-get clean && apt-get autoclean \
+    && rm -rf /tmp/* /var/tmp/* /var/lib/apt/lists/* 
 WORKDIR /root
 
 CMD ["/bin/bash"]
