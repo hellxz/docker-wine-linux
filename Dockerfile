@@ -16,7 +16,8 @@ ENV LC_ALL=zh_CN.UTF-8 \
     XIM=$IM \
     GTK_IM_MODULE=$IM \
     QT_IM_MODULE=$IM \
-    XMODIFIERS="@im=$IM"
+    XMODIFIERS="@im=$IM" \
+    TZ=Asia/Shanghai
 
 RUN rm -rf /var/lib/apt/lists/* \
     && apt-get update \
@@ -27,7 +28,9 @@ RUN rm -rf /var/lib/apt/lists/* \
     && yes|bash /root/deepin-wine-ubuntu/install.sh \
     && /bin/bash /root/link.sh \
     && rm -f /root/link.sh \
-    && rm -rf /root/deepin-wine-ubuntu
+    && rm -rf /root/deepin-wine-ubuntu \
+    && ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
+    && echo ${TZ} > /etc/timezone
 WORKDIR /root
 
 CMD ["/bin/bash"]
